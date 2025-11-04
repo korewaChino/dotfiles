@@ -7,3 +7,8 @@ Host kikuri
     HostName 192.168.1.34
     User cappy
     ForwardAgent yes
+
+Host kita
+    HostName 192.168.1.42
+    User cappy
+    ForwardAgent yes
