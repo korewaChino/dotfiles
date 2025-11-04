@@ -40,8 +40,8 @@ setopt HIST_IGNORE_DUPS
 ## disable mail checking
 #MAILCHECK=0
 
-# autoload -U colors
-#colors
+autoload -U colors
+colors
 
 # Ultramarine ZSH config
 # initialize starship
@@ -59,16 +59,6 @@ bindkey '^[[3;5~' kill-word
 # ALt + Backspace/Delete Keybinds
 bindkey "^[[3~" delete-char
 bindkey -M emacs '^[[3;3~' kill-word
-
-
-
-
-
-[ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/cappy/.lmstudio/bin"
-# End of LM Studio CLI section
 
 
 # fnm
