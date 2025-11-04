@@ -1,0 +1,94 @@
+#
+# .zshrc is sourced in interactive shells.
+# It should contain commands to set up aliases,
+# functions, options, key bindings, etc.
+#
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+autoload -U compinit
+compinit
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+eval "$(sheldon source)"
+eval "$(direnv hook zsh)"
+#source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#allow tab completion in the middle of a word
+setopt COMPLETE_IN_WORD
+zstyle -e ':autocomplete:*:*' list-lines 'reply=3'
+
+## keep background processes at full speed
+#setopt NOBGNICE
+## restart running processes on exit
+#setopt HUP
+
+## history
+setopt APPEND_HISTORY
+## for sharing history between zsh processes
+setopt INC_APPEND_HISTORY
+#setopt appendhistory
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+## never ever beep ever
+#setopt NO_BEEP
+
+## automatically decide when to page a list of completions
+#LISTMAX=0
+
+## disable mail checking
+#MAILCHECK=0
+
+# autoload -U colors
+#colors
+
+# Ultramarine ZSH config
+# initialize starship
+eval "$(starship init zsh)"
+
+
+# Ctrl + Arrow keybindings
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+
+# Ctrl + Backspace/Delete Kebindings
+bindkey '^H' backward-kill-word
+bindkey '^[[3;5~' kill-word
+
+# ALt + Backspace/Delete Keybinds
+bindkey "^[[3~" delete-char
+bindkey -M emacs '^[[3;3~' kill-word
+
+
+
+
+
+[ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/cappy/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# fnm
+FNM_PATH="/home/cappy/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
+
+# pnpm
+export PNPM_HOME="/home/cappy/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# bun completions
+[ -s "/home/cappy/.bun/_bun" ] && source "/home/cappy/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

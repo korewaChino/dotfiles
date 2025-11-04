@@ -1,0 +1,27 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+[direnv]
+disabled = false
+
+[kubernetes]
+disabled = false
+
+
+[jobs]
+symbol = "+"
+number_threshold = 4
+symbol_threshold = 1
+
+[hostname]
+ssh_only = false
+format = "[$ssh_symbol](bold blue)@[$hostname](bold blue) "
+trim_at = ".companyname.com"
+disabled = false
+
+[username]
+style_user = "white bold"
+style_root = "black bold"
+format = "[$user]($style)"
+disabled = false
+show_always = true
+
