@@ -29,7 +29,7 @@ setopt APPEND_HISTORY
 ## for sharing history between zsh processes
 setopt INC_APPEND_HISTORY
 #setopt appendhistory
-setopt SHARE_HISTORY
+#setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
 ## never ever beep ever
 #setopt NO_BEEP
