@@ -1,0 +1,21 @@
+[credential "https://github.com"]
+        helper = 
+        helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+        helper = 
+        helper = !/usr/bin/gh auth git-credential
+[commit]
+        gpgsign = true
+[user]
+        name = Cappy Ishihara
+        email = cappy@cappuchino.xyz
+[pull]
+        rebase = true
+[color]
+        ui = auto
+[core]
+        excludesFile = ~/.gitignore
+[init]
+        defaultBranch = main
+[review "review.lineageos.org"]
+        username = korewaChino
