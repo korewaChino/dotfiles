@@ -15,7 +15,7 @@ eval "$(sheldon source)"
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 #source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 #allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
 zstyle -e ':autocomplete:*:*' list-lines 'reply=3'

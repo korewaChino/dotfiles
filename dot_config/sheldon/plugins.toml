@@ -29,6 +29,9 @@ github = "wushenrong/zsh-eza"
 [plugins.fishysave]
 github = "dariogliendo/fishysave.zsh"
 
+[plugins.autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+
 
 # For example:
 #
