@@ -32,6 +32,9 @@ github = "dariogliendo/fishysave.zsh"
 [plugins.autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 
+[plugins.async]
+github = "mafredri/zsh-async"
+
 
 # For example:
 #
