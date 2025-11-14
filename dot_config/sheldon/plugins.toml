@@ -24,7 +24,7 @@ github = "zdharma-continuum/fast-syntax-highlighting"
 github = "dominik-schwabe/zsh-fnm"
 
 [plugins.eza]
-github = "wushenrong/zsh-eza"
+github = "z-shell/zsh-eza"
 
 [plugins.fishysave]
 github = "dariogliendo/fishysave.zsh"
