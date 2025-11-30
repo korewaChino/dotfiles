@@ -12,3 +12,8 @@ Host kita
     HostName 192.168.1.42
     User cappy
     ForwardAgent yes
+
+Host torako
+    HostName 192.168.1.17
+    User cappy
+    ForwardAgent yes
