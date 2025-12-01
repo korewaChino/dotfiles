@@ -13,7 +13,7 @@ Host kita
     User cappy
     ForwardAgent yes
 
-Host torako
+Host nijika
     HostName 192.168.1.17
     User cappy
     ForwardAgent yes
