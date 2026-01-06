@@ -17,3 +17,11 @@ Host nijika
     HostName 192.168.1.17
     User cappy
     ForwardAgent yes
+
+
+Host net.cappuchino.xyz
+	HostName net.cappuchino.xyz
+
+Host ryou-proxy
+	HostName 10.11.12.5
+	ProxyJump net.cappuchino.xyz
