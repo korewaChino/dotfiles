@@ -1,3 +1,8 @@
+Host *
+	#IdentityFile ~/.ssh/id_ed25519_sk
+	IdentityFile ~/.ssh/id_ed25519
+	IdentityFile ~/.ssh/id_rsa
+
 Host ryou
     HostName 192.168.1.37
     ForwardAgent yes
@@ -25,3 +30,10 @@ Host net.cappuchino.xyz
 Host ryou-proxy
 	HostName 10.11.12.5
 	ProxyJump net.cappuchino.xyz
+
+Host poggers
+   HostName poggers.tailnet-daf2.ts.net
+
+Host remote-gateway
+    HostName 192.168.1.37          # e.g., 172.27.187.184
+    LocalForward 18789 127.0.0.1:18789
