@@ -12,7 +12,6 @@ autoload -U compinit
 compinit
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 eval "$(sheldon source)"
-eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 #source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -84,8 +83,3 @@ esac
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# opencode
-export PATH=/home/cappy/.opencode/bin:$PATH
-
-# OpenClaw Completion
-source "/home/cappy/.openclaw/completions/openclaw.zsh"
