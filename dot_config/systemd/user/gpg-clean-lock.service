@@ -1,0 +1,10 @@
+[Unit]
+Description=Clean up stale GPG lock files
+Before=gpg-agent.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/rm -f %h/.gnupg/public-keys.d/pubring.db.lock
+
+[Install]
+WantedBy=default.target
