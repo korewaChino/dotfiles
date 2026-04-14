@@ -1,7 +1,6 @@
 Host *
-	#IdentityFile ~/.ssh/id_ed25519_sk
-	IdentityFile ~/.ssh/id_ed25519
-	IdentityFile ~/.ssh/id_rsa
+	ForwardAgent yes
+	RemoteForward /run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent.extra
 
 Host ryou
     HostName 192.168.1.37
