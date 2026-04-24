@@ -1,6 +1,12 @@
 Host *
-	ForwardAgent yes
-	RemoteForward /run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent.extra
+	#IdentityFile ~/.ssh/id_ed25519_sk
+	IdentityFile ~/.ssh/id_ed25519
+	IdentityFile ~/.ssh/id_rsa
+	ServerAliveInterval 60
+
+Host unix/* unix%* vsock/* vsock%* vsock-mux/* vsock-mux%*
+    ProxyCommand /usr/lib/systemd/systemd-ssh-proxy %h %p
+    ProxyUseFdpass yes
 
 Host ryou
     HostName 192.168.1.37
@@ -22,6 +28,9 @@ Host nijika
     User cappy
     ForwardAgent yes
 
+Host aikoyorean
+    Hostname mc.akyr.one
+    Port 7997
 
 Host net.cappuchino.xyz
 	HostName net.cappuchino.xyz
