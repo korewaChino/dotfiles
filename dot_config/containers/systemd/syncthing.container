@@ -1,0 +1,22 @@
+[Unit]
+Description=Syncthing service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Restart=on-failure
+TimeoutStartSec=900
+
+[Container]
+Image=docker.io/syncthing/syncthing:latest
+AutoUpdate=registry
+Network=host
+UserNS=keep-id:uid=1000,gid=1000
+
+Volume=%h/.config/syncthing:/var/syncthing/config:Z
+
+Volume=/home/cappy:/home/cappy:Z
+# shares
+#Volume=/srv/stuff:/srv/stuff:Z
+[Install]
+WantedBy=default.target
