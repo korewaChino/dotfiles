@@ -19,3 +19,5 @@
         defaultBranch = main
 [review "review.lineageos.org"]
         username = korewaChino
+[safe]
+	directory = /var/srv/stuff/cappy/hoyolab-auto
