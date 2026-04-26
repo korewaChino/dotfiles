@@ -90,4 +90,4 @@ export PATH=/var/home/cappy/.opencode/bin:$PATH
 # OpenClaw Completion
 #source "/var/home/cappy/.openclaw/completions/openclaw.zsh"
 
-CEPH_ARGS="--id cappy"
+export CEPH_ARGS="--id cappy"
