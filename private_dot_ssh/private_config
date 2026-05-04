@@ -9,29 +9,52 @@ Host unix/* unix%* vsock/* vsock%* vsock-mux/* vsock-mux%*
     ProxyUseFdpass yes
 
 Host ryou
-    HostName 192.168.1.37
-    ForwardAgent yes
     User cappy
+    ForwardAgent yes
+    HostName 10.11.12.5            # WireGuard IP via bastion (default)
+    ProxyJump net.cappuchino.xyz
 
+Match Host ryou exec "nc -zw1 192.168.1.37 22 2>/dev/null"
+    HostName 192.168.1.37          # LAN direct
+    ProxyJump none
 Host kikuri
+    User cappy
+    ForwardAgent yes
     HostName 192.168.1.34
-    User cappy
-    ForwardAgent yes
+    ProxyJump ryou
 
-Host kita
-    HostName 192.168.1.42
+Match Host kikuri exec "nc -zw1 192.168.1.34 22 2>/dev/null"
+    ProxyJump none
+
+    Host kita
     User cappy
     ForwardAgent yes
+    HostName 192.168.1.42
+    ProxyJump ryou
+
+Match Host kita exec "nc -zw1 192.168.1.42 22 2>/dev/null"
+    ProxyJump none
+
 
 Host nijika
-    HostName 192.168.1.17
     User cappy
     ForwardAgent yes
+    HostName 192.168.1.17
+    ProxyJump ryou
+
+Match Host nijika exec "nc -zw1 192.168.1.17 22 2>/dev/null"
+    ProxyJump none
+
 
 Host bocchi
-	HostName 192.168.1.12
-	User cappy
-	ForwardAgent yes
+    User cappy
+    ForwardAgent yes
+    HostName 192.168.1.12
+    ProxyJump ryou
+
+Match Host bocchi exec "nc -zw1 192.168.1.12 22 2>/dev/null"
+    ProxyJump none
+
 
 Host aikoyorean
     Hostname mc.akyr.one
