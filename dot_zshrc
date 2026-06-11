@@ -91,3 +91,4 @@ export PATH=/var/home/cappy/.opencode/bin:$PATH
 #source "/var/home/cappy/.openclaw/completions/openclaw.zsh"
 
 export CEPH_ARGS="--id cappy"
+eval "$(direnv hook zsh)"
