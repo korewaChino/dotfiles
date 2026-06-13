@@ -51,6 +51,12 @@ Host ryou-proxy
 	HostName 10.11.12.5
 	ProxyJump net.cappuchino.xyz
 
+Host reroute-01
+    RemoteForward /run/user/1001/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent.extra
+    HostName 10.10.21.69
+    ForwardAgent yes
+    RequestTTY yes
+
 Host poggers
    HostName poggers.tailnet-daf2.ts.net
 
