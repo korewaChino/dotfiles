@@ -92,3 +92,4 @@ export PATH=/var/home/cappy/.opencode/bin:$PATH
 
 export CEPH_ARGS="--id cappy"
 eval "$(direnv hook zsh)"
+export PATH="$HOME/go/bin:$PATH"
