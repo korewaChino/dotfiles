@@ -91,3 +91,4 @@ export CEPH_ARGS="--id cappy"
 eval "$(direnv hook zsh)"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.local/share/pnpm:$PATH"
+export UV_PYTHON_PREFERENCE=system
