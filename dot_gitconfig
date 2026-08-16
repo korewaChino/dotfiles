@@ -21,3 +21,5 @@
         username = korewaChino
 [safe]
 	directory = /var/srv/stuff/cappy/hoyolab-auto
+[credential]
+	credentialStore = secretservice
