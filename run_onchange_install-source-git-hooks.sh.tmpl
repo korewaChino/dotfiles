@@ -1,0 +1,19 @@
+#!/bin/sh
+# Activate the source-repo git hooks that live in .githooks/.
+#
+# .githooks/ is dot-prefixed, so chezmoi ignores it as source state (it is never
+# applied to your home directory) -- but git tracks and checks it in normally.
+# core.hooksPath is per-repo local config, so each machine needs this once.
+#
+# The hook itself commits and pushes submodule changes before a commit, so the
+# dotfiles repo never publishes a gitlink pointing at a submodule commit that
+# exists nowhere else.
+set -eu
+
+command -v git >/dev/null 2>&1 || exit 0
+
+src={{ .chezmoi.sourceDir | quote }}
+
+[ -d "$src/.githooks" ] || exit 0
+
+git -C "$src" config core.hooksPath .githooks

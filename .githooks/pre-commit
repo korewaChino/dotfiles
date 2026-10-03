@@ -1,0 +1,89 @@
+#!/bin/sh
+# Pre-commit hook for the chezmoi source repo.
+#
+# A submodule is only a pointer: the parent repo records the submodule's commit
+# SHA and nothing else. A dirty submodule working tree is invisible to the
+# parent commit, and a gitlink pointing at a commit that was never pushed
+# leaves every other machine with a broken clone.
+#
+# So, before the parent commit is created: commit any dirty submodule working
+# tree, push it, and stage the updated gitlink, so the commit always references
+# a published commit.
+#
+# Bypass with: git commit --no-verify
+# Installed by: git config core.hooksPath .githooks
+
+set -u
+
+# Recursion guard, in case a submodule ever carries this hook too.
+[ "${CHEZMOI_SUBMODULE_HOOK:-0}" = "1" ] && exit 0
+
+root=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
+[ -n "$root" ] || exit 0
+[ -f "$root/.gitmodules" ] || exit 0
+
+entries=$(git config -f "$root/.gitmodules" --get-regexp '^submodule\..*\.path$' 2>/dev/null) || exit 0
+[ -n "$entries" ] || exit 0
+
+# git exports repo-scoped variables while a commit is in progress -- notably
+# GIT_INDEX_FILE=.git/index, which is relative to the PARENT work tree. They
+# leak into any `git -C <submodule>` call, so the submodule's git reads the
+# wrong index and reports a dirty working tree as clean (and the hook silently
+# does nothing). Strip them for everything that touches a submodule.
+subcmd() {
+	_sub=$1
+	shift
+	env -u GIT_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE -u GIT_PREFIX \
+		-u GIT_OBJECT_DIRECTORY -u GIT_COMMON_DIR \
+		-u GIT_ALTERNATE_OBJECT_DIRECTORIES -u GIT_QUARANTINE_PATH \
+		CHEZMOI_SUBMODULE_HOOK=1 git -C "$_sub" "$@"
+}
+
+host=$(hostname -s 2>/dev/null || hostname 2>/dev/null || echo unknown)
+
+while read -r key path; do
+	[ -n "${path:-}" ] || continue
+	name=${key#submodule.}
+	name=${name%.path}
+	sub="$root/$path"
+	[ -e "$sub/.git" ] || continue
+
+	needs_push=0
+
+	if [ -n "$(subcmd "$sub" status --porcelain 2>/dev/null)" ]; then
+		echo "pre-commit: committing changes in submodule $path"
+		subcmd "$sub" add -A || exit 1
+		subcmd "$sub" commit -q -m "Sync $path from $host" || exit 1
+		needs_push=1
+	fi
+
+	# Record the submodule's current HEAD in this commit's tree.
+	git -C "$root" add -- "$path" 2>/dev/null || :
+
+	# Push if we just made a commit, or if HEAD is not reachable from any
+	# remote-tracking ref at all.
+	if [ "$needs_push" = 1 ] || [ -z "$(subcmd "$sub" branch -r --contains HEAD 2>/dev/null)" ]; then
+		branch=$(git config -f "$root/.gitmodules" --get "submodule.$name.branch" 2>/dev/null) || :
+		if [ -z "${branch:-}" ]; then
+			branch=$(subcmd "$sub" symbolic-ref -q --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^origin/||') || :
+		fi
+		echo "pre-commit: pushing submodule $path"
+		if [ -n "${branch:-}" ]; then
+			# Also works from a detached HEAD, which is what a fresh
+			# `chezmoi init --recurse-submodules` leaves behind.
+			subcmd "$sub" push origin "HEAD:refs/heads/$branch" || push_failed=1
+		else
+			subcmd "$sub" push || push_failed=1
+		fi
+		if [ "${push_failed:-0}" = 1 ]; then
+			echo "pre-commit: could not push submodule $path." >&2
+			echo "pre-commit: refusing to commit a gitlink to an unpublished commit." >&2
+			echo "pre-commit: fix it, or bypass with: git commit --no-verify" >&2
+			exit 1
+		fi
+	fi
+done <<EOF
+$entries
+EOF
+
+exit 0
