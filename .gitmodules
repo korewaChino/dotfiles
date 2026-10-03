@@ -1,0 +1,3 @@
+[submodule "kessoku-ultramarine"]
+	path = kessoku-ultramarine
+	url = git@github.com:KessokuNet/ultramarine.git
