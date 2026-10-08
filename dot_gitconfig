@@ -23,3 +23,14 @@
 	directory = /var/srv/stuff/cappy/hoyolab-auto
 [credential]
 	credentialStore = secretservice
+	helper = 
+	helper = /usr/bin/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[alias]
+	ida = !cd \"${GIT_PREFIX:-.}\" && \"/var/home/cappy/opt/ida-pro-9.4/tools/teams/git-ida\"

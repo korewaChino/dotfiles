@@ -13,31 +13,35 @@ Host ryou
     User cappy
     ForwardAgent yes
     HostName 192.168.1.37
-    ProxyCommand bash -c 'nc -zw1 192.168.1.37 22 2>/dev/null && exec nc %h %p || exec ssh -W 10.11.12.5:22 net.cappuchino.xyz'
+    # ProxyCommand bash -c 'nc -zw1 192.168.1.37 22 2>/dev/null && exec nc %h %p || exec ssh -W 10.11.12.5:22 net.cappuchino.xyz'
+
+Host catserver
+    HostName catserver.barking-kokanue.ts.net
+    User kita
 
 Host kikuri
     User cappy
     ForwardAgent yes
     HostName 192.168.1.34
-    ProxyCommand bash -c 'nc -zw1 192.168.1.34 22 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p ryou'
+    # ProxyCommand bash -c 'nc -zw1 192.168.1.34 22 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p ryou'
 
 Host kita
     User cappy
     ForwardAgent yes
     HostName 192.168.1.42
-    ProxyCommand bash -c 'nc -zw1 192.168.1.42 22 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p ryou'
+    # ProxyCommand bash -c 'nc -zw1 192.168.1.42 22 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p ryou'
 
 Host nijika
     User cappy
     ForwardAgent yes
     HostName 192.168.1.17
-    ProxyCommand bash -c 'nc -zw1 192.168.1.17 22 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p ryou'
+    # ProxyCommand bash -c 'nc -zw1 192.168.1.17 22 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p ryou'
 
 Host bocchi
     User cappy
     ForwardAgent yes
     HostName 192.168.1.12
-    ProxyCommand bash -c 'nc -zw1 192.168.1.12 22 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p ryou'
+    # ProxyCommand bash -c 'nc -zw1 192.168.1.12 22 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p ryou'
 
 
 Host aikoyorean
