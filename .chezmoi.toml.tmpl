@@ -5,3 +5,16 @@ encryption = "gpg"
 [git]
     autoCommit = true
     autoPush = true
+
+# sync submodules before autoCommit; the pre-commit hook alone runs too late to stage the gitlink
+[hooks.re-add.pre]
+    command = "git"
+    args = ["-C", {{ .chezmoi.sourceDir | quote }}, "hook", "run", "--ignore-missing", "pre-commit"]
+
+[hooks.add.pre]
+    command = "git"
+    args = ["-C", {{ .chezmoi.sourceDir | quote }}, "hook", "run", "--ignore-missing", "pre-commit"]
+
+[hooks.edit.pre]
+    command = "git"
+    args = ["-C", {{ .chezmoi.sourceDir | quote }}, "hook", "run", "--ignore-missing", "pre-commit"]
