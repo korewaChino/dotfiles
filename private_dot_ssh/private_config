@@ -63,7 +63,10 @@ Host reroute-01
     ForwardAgent yes
     RequestTTY yes
 
-
+Host work
+    HostName 100.81.161.6
+	Port 2226
+	
 Host poggers
    HostName poggers.tailnet-daf2.ts.net
 
@@ -80,3 +83,8 @@ Host knot.cappuchino.xyz
     HostName knot.cappuchino.xyz
     User git
     Port 2222
+
+Host work-via-kikuri
+    HostName 100.81.161.6
+    Port 2226
+    ProxyJump kikuri
