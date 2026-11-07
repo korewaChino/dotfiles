@@ -1,5 +1,9 @@
+[credential]
+	credentialStore = secretservice
+	helper =
+	helper = /usr/bin/git-credential-manager
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
@@ -21,10 +25,6 @@
         username = korewaChino
 [safe]
 	directory = /var/srv/stuff/cappy/hoyolab-auto
-[credential]
-	credentialStore = secretservice
-	helper = 
-	helper = /usr/bin/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 [filter "lfs"]

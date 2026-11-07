@@ -63,9 +63,9 @@ Host reroute-01
     ForwardAgent yes
     RequestTTY yes
 
-Host work
-    HostName 100.81.161.6
-	Port 2226
+#Host work
+#    HostName 100.81.161.6
+#	Port 2226
 	
 Host poggers
    HostName poggers.tailnet-daf2.ts.net
