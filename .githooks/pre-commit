@@ -68,14 +68,25 @@ while read -r key path; do
 			branch=$(subcmd "$sub" symbolic-ref -q --short refs/remotes/origin/HEAD 2>/dev/null | sed 's|^origin/||') || :
 		fi
 		echo "pre-commit: pushing submodule $path"
+		push_failed=0
 		if [ -n "${branch:-}" ]; then
 			# Also works from a detached HEAD, which is what a fresh
 			# `chezmoi init --recurse-submodules` leaves behind.
-			subcmd "$sub" push origin "HEAD:refs/heads/$branch" || push_failed=1
+			if ! subcmd "$sub" push origin "HEAD:refs/heads/$branch"; then
+				echo "pre-commit: rebasing submodule $path onto origin/$branch"
+				if subcmd "$sub" fetch origin "$branch" &&
+					subcmd "$sub" rebase "refs/remotes/origin/$branch"; then
+					git -C "$root" add -- "$path" 2>/dev/null || :
+					subcmd "$sub" push origin "HEAD:refs/heads/$branch" || push_failed=1
+				else
+					subcmd "$sub" rebase --abort 2>/dev/null || :
+					push_failed=1
+				fi
+			fi
 		else
 			subcmd "$sub" push || push_failed=1
 		fi
-		if [ "${push_failed:-0}" = 1 ]; then
+		if [ "$push_failed" = 1 ]; then
 			echo "pre-commit: could not push submodule $path." >&2
 			echo "pre-commit: refusing to commit a gitlink to an unpublished commit." >&2
 			echo "pre-commit: fix it, or bypass with: git commit --no-verify" >&2
