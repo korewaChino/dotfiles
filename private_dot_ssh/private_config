@@ -10,7 +10,7 @@ Host unix/* unix%* vsock/* vsock%* vsock-mux/* vsock-mux%*
 
 
 Host ryou
-    User cappy
+    User root
     ForwardAgent yes
     HostName 192.168.1.37
     # ProxyCommand bash -c 'nc -zw1 192.168.1.37 22 2>/dev/null && exec nc %h %p || exec ssh -W 10.11.12.5:22 net.cappuchino.xyz'
@@ -32,13 +32,13 @@ Host kita
     # ProxyCommand bash -c 'nc -zw1 192.168.1.42 22 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p ryou'
 
 Host nijika
-    User cappy
+    User root
     ForwardAgent yes
     HostName 192.168.1.17
     # ProxyCommand bash -c 'nc -zw1 192.168.1.17 22 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p ryou'
 
 Host bocchi
-    User cappy
+    User root
     ForwardAgent yes
     HostName 192.168.1.12
     # ProxyCommand bash -c 'nc -zw1 192.168.1.12 22 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p ryou'
