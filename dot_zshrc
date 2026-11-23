@@ -95,3 +95,12 @@ export UV_PYTHON_PREFERENCE=system
 
 # GitHub MCP server auth for Claude Code, sourced from gh keyring
 export GITHUB_PERSONAL_ACCESS_TOKEN="$(gh auth token 2>/dev/null)"
+
+# Added by CoinPay installer
+export PATH="$HOME/.local/bin:$PATH"
+
+# Added by Infernet Protocol installer
+export PATH="/var/home/cappy/.local/share/containers/infernet/bin:$PATH"
+
+# Added by c0mpute installer
+export PATH="$HOME/.c0mpute/bin:$HOME/.local/bin:$PATH"
